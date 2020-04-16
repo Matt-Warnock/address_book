@@ -1,3 +1,57 @@
 body {
+  background: linear-gradient(to right bottom, #e6e9e8, #dddfe1);
   font-family: 'Montserrat', sans-serif;
+  color: #4b505c;
+}
+h1, th {
+  text-transform: uppercase;
+}
+
+h1 {
+  padding: 10% 0 5% 10%;
+}
+
+.container {
+  background: no-repeat 85% 8%/30% url(images/paint.svg), #f2f2f2;
+  width: 96%;
+  margin: auto;
+  padding-bottom: 3em;
+  box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.4);
+}
+.delete_selection {
+  padding-left: 10%;
+}
+.delete_selection img {
+  width: 4%;
+  margin-left: 4em;
+}
+.delete_selection p, table a {
+  color: #a7b2c5;
+}
+.delete_selection input {
+  background-color: #dedfe2;
+  border-style: none;
+  outline: none;
+  padding: 0.3em;
+  font-size: 1.3em;
+}
+.error_message {
+  color: #fb4633;
+}
+table {
+  margin: 8%;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+}
+th, td {
+  padding: 0.8em 2em;
+  border-bottom: 1px dashed #4b505c;
+}
+::selection {
+  background: #fb4633;
+}
+::-moz-selection {
+  background: #fb4633;
 }
