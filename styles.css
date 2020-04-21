@@ -25,7 +25,7 @@ h1 {
   width: 4%;
   margin-left: 4em;
 }
-.delete_selection p, table a {
+.extra_info, table a {
   color: #a7b2c5;
 }
 .delete_selection input {
@@ -35,7 +35,8 @@ h1 {
   padding: 0.3em;
   font-size: 1.3em;
 }
-.error_message {
+.error_message  {
+  position: absolute;
   color: #fb4633;
 }
 table {
