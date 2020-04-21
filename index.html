@@ -15,17 +15,21 @@
 
 <body>
   <div class="container">
+
     <h1>address book</h1>
+
     <div class="delete_selection">
       <div>
         <img src="images/delete.svg" alt="two swords crossed">
       </div>
+
       <label for="contact_name">Delete contact<br>from database</label>
       <p>&#40;Exact contact name match &#41;</p>
-      <input type="text" name="contact_name" value="" placeholder="Contact name..." required>
-      <p class="error_message"></p>
+      <input type="text" name="contact_name" id="user_contact_name" placeholder="Contact name..." required>
 
+      <p class="error_message" id="error_message"></p>
     </div>
+
     <table>
       <thead>
         <tr>
@@ -35,7 +39,7 @@
           <th>ZIP Code</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="contact_details">
         <tr>
           <td>Silas Brewer</td>
           <td><a href="mailto:non.sollicitudin@mi.com">non.sollicitudin@mi.com</a></td>
@@ -111,6 +115,7 @@
       </tbody>
     </table>
   </div>
+  <script type="text/javascript" src="app.js"></script>
 </body>
 
 </html>
