@@ -1,4 +1,3 @@
-
 function buildContactList() {
   const allAddress = document.getElementById('contact_details');
   return Array.from(allAddress.rows);
@@ -7,7 +6,7 @@ function buildContactList() {
 function displayInfoMessage(userResult) {
   const note = document.getElementById('error_message');
 
-    if(userResult === undefined || userResult.length < 1) {
+  if(userResult === undefined || userResult.length < 1) {
     note.textContent = 'This contact doesnt exist';
   }else {
     note.textContent = '';
@@ -15,18 +14,43 @@ function displayInfoMessage(userResult) {
 }
 
 function deleteContact(toBeDeleted) {
-    if(toBeDeleted !== undefined) {
-      toBeDeleted.remove();
+  if(toBeDeleted !== undefined) {
+    toBeDeleted.remove();
   }
 }
 
 function contactDatabaseDeletion(nameInput) {
   let rows = buildContactList();
 
-  let rowIndex = rows.find(row => row.cells[0].textContent === nameInput.value);
+  let addressToDelete = rows.find(row => row.cells[0].textContent === nameInput.value);
 
-  displayInfoMessage(rowIndex);
-  deleteContact(rowIndex);
+  displayInfoMessage(addressToDelete);
+  deleteContact(addressToDelete);
+}
+
+function hideAllAddress() {
+  let rows = buildContactList();
+
+  rows.forEach(row => row.classList.add('hide_address'));
+}
+
+function findMatchingContacts(searchText) {
+  let rows = buildContactList();
+
+  return rows.filter(row => {
+    return Array.from(row.cells).some(cell => cell.textContent.toLowerCase().includes(searchText));
+  });
+}
+
+function displayActions(searchText) {
+  let result = findMatchingContacts(searchText);
+
+  if (result.length > 0) {
+    hideAllAddress();
+  }
+  displayInfoMessage(result);
+
+  result.forEach(contact => contact.classList.remove('hide_address'));
 }
 
 
@@ -38,37 +62,11 @@ document.getElementById('user_contact_name').addEventListener('keydown', event =
   }
 });
 
-function hideAllAddress() {
-  let rows = buildContactList();
-
-  rows.forEach(row => row.classList.add('hide_address'));
-}
-
-function findMatchingContacts() {
-  const userSearch = document.getElementById('search_word');
-  let rows = buildContactList();
-
-  return rows.filter(row => {
-     return Array.from(row.cells).some(cell => cell.textContent.includes(userSearch.value));
-  });
-}
-
-function displayActions() {
-  let result = findMatchingContacts();
-
-  if (result.length > 0) {
-    hideAllAddress();
-  }
-
-  displayInfoMessage(result);
-
-  result.forEach(contact => contact.classList.remove('hide_address'));
-}
-
 document.getElementById('search_word').addEventListener('keydown', event => {
+  const userSearch = document.getElementById('search_word').value.toLowerCase();
 
   if (event.code === 'Enter'){
 
-    displayActions();
+    displayActions(userSearch);
   }
 });
