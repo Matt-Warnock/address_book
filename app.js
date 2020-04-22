@@ -4,10 +4,10 @@ function buildContactList() {
   return Array.from(allAddress.rows);
 }
 
-function infoMessage(toBeDeleted) {
+function displayInfoMessage(userResult) {
   const note = document.getElementById('error_message');
 
-    if(toBeDeleted === undefined) {
+    if(userResult === undefined || userResult.length < 1) {
     note.textContent = 'This contact doesnt exist';
   }else {
     note.textContent = '';
@@ -25,7 +25,7 @@ function contactDatabaseDeletion(nameInput) {
 
   let rowIndex = rows.find(row => row.cells[0].textContent === nameInput.value);
 
-  infoMessage(rowIndex);
+  displayInfoMessage(rowIndex);
   deleteContact(rowIndex);
 }
 
@@ -44,10 +44,31 @@ function hideAllAddress() {
   rows.forEach(row => row.classList.add('hide_address'));
 }
 
+function findMatchingContacts() {
+  const userSearch = document.getElementById('search_word');
+  let rows = buildContactList();
+
+  return rows.filter(row => {
+     return Array.from(row.cells).some(cell => cell.textContent.includes(userSearch.value));
+  });
+}
+
+function displayActions() {
+  let result = findMatchingContacts();
+
+  if (result.length > 0) {
+    hideAllAddress();
+  }
+
+  displayInfoMessage(result);
+
+  result.forEach(contact => contact.classList.remove('hide_address'));
+}
+
 document.getElementById('search_word').addEventListener('keydown', event => {
 
   if (event.code === 'Enter'){
-    hideAllAddress();
 
+    displayActions();
   }
 });
