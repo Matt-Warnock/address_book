@@ -1,17 +1,121 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Address Book</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <title>Address Book</title>
 
-  </head>
-  <body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 
-  </body>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>address book</h1>
+
+    <div class="delete_selection">
+      <div>
+        <img src="images/delete.svg" alt="two swords crossed">
+      </div>
+
+      <label for="contact_name">Delete contact<br>from database</label>
+      <p class="extra_info">&#40;Exact contact name match &#41;</p>
+      <input type="text" name="contact_name" id="user_contact_name" placeholder="Contact name..." required>
+
+      <p class="error_message" id="error_message"></p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>ZIP Code</th>
+        </tr>
+      </thead>
+      <tbody id="contact_details">
+        <tr>
+          <td>Silas Brewer</td>
+          <td><a href="mailto:non.sollicitudin@mi.com">non.sollicitudin@mi.com</a></td>
+          <td>Ap #501-7012 Nec Rd.</td>
+          <td>32877</td>
+        </tr>
+        <tr>
+          <td>Martina Hogan</td>
+          <td><a href="mailto:diam@massalobortisultrices.net">diam@massalobortisultrices.net</a></td>
+          <td>1463 Vel, St.</td>
+          <td>471895</td>
+        </tr>
+        <tr>
+          <td>David Key</td>
+          <td><a href="mailto:et.euismod.et@Nunc.edu">et.euismod.et@Nunc.edu</a></td>
+          <td>Ap #665-1422 Tellus, Av.</td>
+          <td>4531</td>
+        </tr>
+        <tr>
+          <td>Silas Medina</td>
+          <td><a href="mailto:lorem@Utnecurna.com">lorem@Utnecurna.com</a></td>
+          <td>423-6285 Ridiculus Road</td>
+          <td>1944 CO</td>
+        </tr>
+        <tr>
+          <td>Bruce Garrett</td>
+          <td><a href="mailto:posuere.vulputate@conubia.co.uk">posuere.vulputate@conubia.co.uk</a></td>
+          <td>Ap #906-2667 Consectetuer Street</td>
+          <td>1532</td>
+        </tr>
+        <tr>
+          <td>Daphne Obrien</td>
+          <td><a href="mailto:Fusce.mollis@mifelisadipiscing.co.uk">Fusce.mollis@mifelisadipiscing.co.uk</a></td>
+          <td>P.O. Box 214, 1373 Neque Street</td>
+          <td>22651-10426</td>
+        </tr>
+        <tr>
+          <td>Herman Rodgers</td>
+          <td><a href="mailto:vitae.risus@vehicularisus.ca">vitae.risus@vehicularisus.ca</a></td>
+          <td>5059 Pulvinar Rd.</td>
+          <td>20569</td>
+        </tr>
+        <tr>
+          <td>Amos Shepherd</td>
+          <td><a href="mailto:Integer.tincidunt@convallis.ca">Integer.tincidunt@convallis.ca</a></td>
+          <td>P.O. Box 293, 1841 Iaculis St.</td>
+          <td>80515-267</td>
+        </tr>
+        <tr>
+          <td>Rigel Mcclure</td>
+          <td><a href="mailto:Cum.sociis@elitAliquam.co.uk">Cum.sociis@elitAliquam.co.uk</a></td>
+          <td>Ap #541-4098 Nunc Av.</td>
+          <td>49537</td>
+        </tr>
+        <tr>
+          <td>Felicia Hays</td>
+          <td><a href="mailto:Mauris@dolordolortempus.org">Mauris@dolordolortempus.org</a></td>
+          <td>373-6393 Aliquam Rd.</td>
+          <td>23240</td>
+        </tr>
+        <tr>
+          <td>Nina Carrillo</td>
+          <td><a href="mailto:imperdiet@felisorci.ca">imperdiet@felisorci.ca</a></td>
+          <td>Ap #243-5461 Sed Ave</td>
+          <td>91265</td>
+        </tr>
+        <tr>
+          <td>Jack Spence</td>
+          <td><a href="mailto:Donec@dolor.edu">Donec@dolor.edu</a></td>
+          <td>5041 Eget Rd.</td>
+          <td>85-091</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script type="text/javascript" src="app.js"></script>
+</body>
+
 </html>
