@@ -61,3 +61,6 @@ th, td {
 ::-moz-selection {
   background: #fb4633;
 }
+.hide_address {
+  display: none;
+}

@@ -37,3 +37,17 @@ document.getElementById('user_contact_name').addEventListener('keydown', event =
     contactDatabaseDeletion(userEntry);
   }
 });
+
+function hideAllAddress() {
+  let rows = buildContactList();
+
+  rows.forEach(row => row.classList.add('hide_address'));
+}
+
+document.getElementById('search_word').addEventListener('keydown', event => {
+
+  if (event.code === 'Enter'){
+    hideAllAddress();
+
+  }
+});
