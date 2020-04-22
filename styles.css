@@ -18,22 +18,27 @@ h1 {
   padding-bottom: 3em;
   box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.4);
 }
-.delete_selection {
+.editing_container {
+  display: flex;
   padding-left: 10%;
+  font-size: 0.8em;
 }
-.delete_selection img {
-  width: 4%;
-  margin-left: 4em;
+.editing_container img {
+  width: 20%;
+  margin-left: 3.8em;
 }
 .extra_info, table a {
   color: #a7b2c5;
 }
-.delete_selection input {
+.editing_container input {
   background-color: #dedfe2;
   border-style: none;
   outline: none;
   padding: 0.3em;
-  font-size: 1.3em;
+}
+
+.delete_field {
+  margin-left: 2em;
 }
 .error_message  {
   position: absolute;
