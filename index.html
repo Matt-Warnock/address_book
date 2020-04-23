@@ -18,17 +18,26 @@
 
     <h1>address book</h1>
 
-    <div class="delete_selection">
-      <div>
-        <img src="images/delete.svg" alt="two swords crossed">
+    <div class="editing_container">
+
+      <div class="search_field">
+          <img src="images/search.svg" alt="open book with magnifing glass" width="50" height="50">
+
+        <label for="search_word">Search in contacts<br>database</label>
+        <p class="extra_info">(Fussy search by any field)</p>
+        <input type="text" name="search_word" id="search_word" placeholder="Search..." required>
       </div>
 
-      <label for="contact_name">Delete contact<br>from database</label>
-      <p class="extra_info">&#40;Exact contact name match &#41;</p>
-      <input type="text" name="contact_name" id="user_contact_name" placeholder="Contact name..." required>
+      <div class="delete_field">
+          <img src="images/delete.svg" alt="two swords crossed" width="50" height="50">
 
-      <p class="error_message" id="error_message"></p>
+        <label for="contact_name">Delete contact<br>from database</label>
+        <p class="extra_info">(Exact contact name match)</p>
+        <input type="text" name="contact_name" id="user_contact_name" placeholder="Contact name..." required>
+      </div>
+
     </div>
+    <p class="error_message" id="error_message"></p>
 
     <table>
       <thead>
