@@ -5,52 +5,51 @@ function buildContactList() {
 
 function displayInfoMessage(userResult) {
   const note = document.getElementById('error_message');
-
-  if(userResult === undefined || userResult.length < 1) {
-    note.textContent = 'This contact doesnt exist';
-  }else {
-    note.textContent = '';
-  }
+  note.textContent = userResult;
 }
 
 function deleteContact(toBeDeleted) {
-  if(toBeDeleted !== undefined) {
-    toBeDeleted.remove();
-  }
+  toBeDeleted.remove();
 }
 
 function contactDatabaseDeletion(nameInput) {
   let rows = buildContactList();
-
   let addressToDelete = rows.find(row => row.cells[0].textContent === nameInput.value);
 
-  displayInfoMessage(addressToDelete);
-  deleteContact(addressToDelete);
+  if(addressToDelete !== undefined){
+    displayInfoMessage('');
+    deleteContact(addressToDelete);
+  }else {
+    displayInfoMessage('That contact does not exist');
+  }
 }
 
-function hideAllAddress() {
-  let rows = buildContactList();
-
+function hideAllAddress(rows) {
   rows.forEach(row => row.classList.add('hide_address'));
 }
 
-function findMatchingContacts(searchText) {
-  let rows = buildContactList();
+function restoreAllAddress(rows) {
+  rows.forEach(row => row.classList.remove('hide_address'));
+}
 
+function findMatchingContacts(searchText, rows) {
   return rows.filter(row => {
     return Array.from(row.cells).some(cell => cell.textContent.toLowerCase().includes(searchText));
   });
 }
 
-function displayActions(searchText) {
-  let result = findMatchingContacts(searchText);
+function displaySearchResult(searchText) {
+  let rows = buildContactList();
+  let result = findMatchingContacts(searchText, rows);
 
   if (result.length > 0) {
-    hideAllAddress();
+    displayInfoMessage('');
+    hideAllAddress(rows);
+    result.forEach(contact => contact.classList.remove('hide_address'));
+  }else {
+    restoreAllAddress(rows);
+    displayInfoMessage('Even With all of the power of Matt\'s javascript, I can not find any match with your search!' );
   }
-  displayInfoMessage(result);
-
-  result.forEach(contact => contact.classList.remove('hide_address'));
 }
 
 
@@ -66,7 +65,6 @@ document.getElementById('search_word').addEventListener('keydown', event => {
   const userSearch = document.getElementById('search_word').value.toLowerCase();
 
   if (event.code === 'Enter'){
-
-    displayActions(userSearch);
+    displaySearchResult(userSearch);
   }
 });

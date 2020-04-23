@@ -24,7 +24,7 @@ h1 {
   font-size: 0.8em;
 }
 .editing_container img {
-  width: 20%;
+  display: block;
   margin-left: 3.8em;
 }
 .extra_info, table a {
