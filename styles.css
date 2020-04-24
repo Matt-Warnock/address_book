@@ -25,7 +25,9 @@ h1 {
 }
 .editing_container img {
   display: block;
-  margin-left: 3.8em;
+  max-width: 100%;
+  height: auto;
+  margin-left: 3.5em;
 }
 .extra_info, table a {
   color: #a7b2c5;
@@ -51,6 +53,12 @@ table {
 }
 th {
   text-align: left;
+}
+.ascending {
+  background: 0%/1em url(images/up.svg) no-repeat;
+}
+.decending {
+  background: 0%/1em url(images/down.svg) no-repeat;
 }
 th, td {
   padding: 0.8em 2em;
