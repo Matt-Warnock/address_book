@@ -54,6 +54,10 @@ table {
 th {
   text-align: left;
 }
+th:hover {
+  cursor: pointer;
+  user-select: none;
+}
 .ascending {
   background: 0%/1em url(images/up.svg) no-repeat;
 }

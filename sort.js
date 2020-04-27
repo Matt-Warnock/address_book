@@ -1,20 +1,17 @@
-let sortingFlag;
-
-function createSortingFlag() {
+function initializeSortingStatus() {
   let rows = buildContactList();
   colunmAmount = rows[0].cells.length;
 
-  sortingFlag = new Array(colunmAmount);
-  sortingFlag.fill(false);
+  columnStatus = new Array(colunmAmount);
+  columnStatus.fill(false);
 }
 
-function columndescent(userSelected) {
+function columnAlphabetical(userSelected) {
   let rows = buildContactList();
-  let colunmClicked = userSelected;
 
   return rows.sort((a, b) => {
-    let firstCell = a.cells[colunmClicked].textContent;
-    let nextCell = b.cells[colunmClicked].textContent;
+    let firstCell = a.cells[userSelected].textContent;
+    let nextCell = b.cells[userSelected].textContent;
     if(firstCell < nextCell){
       return -1;
     }
@@ -25,33 +22,36 @@ function columndescent(userSelected) {
   });
 }
 
-function updateAddressOrder(orderedRows) {
+function updateContactsOrder(orderedContacts) {
   let table = document.getElementById('contact_details');
   let fragment = new DocumentFragment();
 
-  orderedRows.forEach(row => fragment.appendChild(row));
-
+  orderedContacts.forEach(row => fragment.appendChild(row));
   table.appendChild(fragment);
 }
 
 function changeDisplayArrow(userSelected) {
   let arrows = document.getElementById('column_names').rows[0].cells[userSelected];
-  
+
   arrows.classList.toggle('decending');
 }
 
-createSortingFlag();
+
+let columnStatus;
+
+initializeSortingStatus();
 
 document.getElementById('column_names').addEventListener('click', event => {
-  let changeThisColomnIndex = event.target.cellIndex;
-  let orderedRows = columndescent(changeThisColomnIndex);
+  let columnClicked = event.target.cellIndex;
+  let orderedContacts = columnAlphabetical(columnClicked);
 
-  if(sortingFlag[changeThisColomnIndex]) {
-  updateAddressOrder(orderedRows.reverse());
-  sortingFlag.splice(changeThisColomnIndex, 1 , false);
+  if(columnStatus[columnClicked]) {
+    updateContactsOrder(orderedContacts.reverse());
+    columnStatus.splice(columnClicked, 1 , false);
   }else {
-  updateAddressOrder(orderedRows);
-  sortingFlag.splice(changeThisColomnIndex, 1 , true);
+    updateContactsOrder(orderedContacts);
+    columnStatus.splice(columnClicked, 1 , true);
   }
-  changeDisplayArrow(changeThisColomnIndex);
+
+  changeDisplayArrow(columnClicked);
 });
