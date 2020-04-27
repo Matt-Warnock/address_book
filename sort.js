@@ -34,6 +34,12 @@ function updateAddressOrder(orderedRows) {
   table.appendChild(fragment);
 }
 
+function changeDisplayArrow(userSelected) {
+  let arrows = document.getElementById('column_names').rows[0].cells[userSelected];
+  
+  arrows.classList.toggle('decending');
+}
+
 createSortingFlag();
 
 document.getElementById('column_names').addEventListener('click', event => {
@@ -47,4 +53,5 @@ document.getElementById('column_names').addEventListener('click', event => {
   updateAddressOrder(orderedRows);
   sortingFlag.splice(changeThisColomnIndex, 1 , true);
   }
+  changeDisplayArrow(changeThisColomnIndex);
 });
