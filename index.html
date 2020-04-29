@@ -25,7 +25,7 @@
 
         <label for="search_word">Search in contacts<br>database</label>
         <p class="extra_info">(Fussy search by any field)</p>
-        <input type="text" name="search_word" id="search_word" placeholder="Search..." required>
+        <input type="text" name="search_word" id="search_word" placeholder="Search..." autocomplete="off" required>
       </div>
 
       <div class="delete_field">
@@ -33,19 +33,19 @@
 
         <label for="contact_name">Delete contact<br>from database</label>
         <p class="extra_info">(Exact contact name match)</p>
-        <input type="text" name="contact_name" id="user_contact_name" placeholder="Contact name..." required>
+        <input type="text" name="contact_name" id="user_contact_name" placeholder="Contact name..." autocomplete="off" required>
       </div>
 
     </div>
     <p class="error_message" id="error_message"></p>
 
     <table>
-      <thead>
+      <thead id="column_names">
         <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>ZIP Code</th>
+          <th class="ascending">Name</th>
+          <th class="ascending">Email</th>
+          <th class="ascending">Address</th>
+          <th class="ascending">ZIP Code</th>
         </tr>
       </thead>
       <tbody id="contact_details">
@@ -124,7 +124,9 @@
       </tbody>
     </table>
   </div>
-  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="delete.js"></script>
+  <script type="text/javascript" src="search.js"></script>
+  <script type="text/javascript" src="sort.js"></script>
 </body>
 
 </html>
