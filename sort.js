@@ -9,9 +9,9 @@ function initializeSortingStatus() {
 function columnAlphabetical(userSelected) {
   let rows = buildContactList();
 
-  return rows.sort((a, b) => {
-    let firstCell = a.cells[userSelected].textContent;
-    let nextCell = b.cells[userSelected].textContent;
+  let orderedRows = rows.sort((a, b) => {
+    let firstCell = a.cells[userSelected].textContent,
+    nextCell = b.cells[userSelected].textContent;
     if(firstCell < nextCell){
       return -1;
     }
@@ -20,6 +20,13 @@ function columnAlphabetical(userSelected) {
     }
     return 0;
   });
+
+  if(columnStatus[userSelected]) {
+    orderedRows.reverse();
+  }
+  columnStatus[userSelected] = !columnStatus[userSelected];
+  
+  return orderedRows;
 }
 
 function updateContactsOrder(orderedContacts) {
@@ -45,13 +52,6 @@ document.getElementById('column_names').addEventListener('click', event => {
   let columnClicked = event.target.cellIndex;
   let orderedContacts = columnAlphabetical(columnClicked);
 
-  if(columnStatus[columnClicked]) {
-    updateContactsOrder(orderedContacts.reverse());
-    columnStatus.splice(columnClicked, 1 , false);
-  }else {
-    updateContactsOrder(orderedContacts);
-    columnStatus.splice(columnClicked, 1 , true);
-  }
-
+  updateContactsOrder(orderedContacts);
   changeDisplayArrow(columnClicked);
 });
