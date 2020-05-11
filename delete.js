@@ -15,7 +15,7 @@ const addressBook = {
   }
 };
 
-const ui = {
+const deletionUi = {
   _userEntry: document.getElementById('user_contact_name'),
   _messageOutput: document.getElementById('error_message'),
 
@@ -50,4 +50,4 @@ const ui = {
     });
   }
 };
-ui.initiaize();
+deletionUi.initiaize();
