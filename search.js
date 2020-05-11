@@ -1,8 +1,6 @@
 const addressList = {
-  addressRows: addressBook.buildContactList(),
-
-  findMatchingContacts(searchText) {
-    return this.addressRows.filter(row => {
+  findMatchingContacts(searchText, rows) {
+    return rows.filter(row => {
       return Array.from(row.cells).some(cell => cell.textContent.toLowerCase().includes(searchText));
     });
   }
@@ -24,8 +22,8 @@ const searcherUi = {
   },
 
   displaySearchResult() {
-    let result = addressList.findMatchingContacts(this.userSearch);
-    let rows = addressList.addressRows;
+    let rows = addressBook.buildContactList();
+    let result = addressList.findMatchingContacts(this.userSearch, rows);
 
     if (result.length > 0) {
       deletionUi.displayInfoMessage = '';
