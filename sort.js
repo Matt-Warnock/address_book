@@ -1,57 +1,65 @@
-function initializeSortingStatus() {
-  let rows = buildContactList();
-  colunmAmount = rows[0].cells.length;
+const colunms = {
+  columnStatus: [],
 
-  columnStatus = new Array(colunmAmount);
-  columnStatus.fill(false);
-}
+  initializeSortingStatus() {
+    let rows = addressBook.buildContactList();
+    
+    this.columnStatus = new Array(rows[0].cells.length);
+    this.columnStatus.fill(false);
+  },
 
-function columnAlphabetical(userSelected) {
-  let rows = buildContactList();
+  columnAlphabetical(userSelected) {
+    let rows = addressBook.buildContactList();
 
-  let orderedRows = rows.sort((a, b) => {
-    let firstCell = a.cells[userSelected].textContent,
-    nextCell = b.cells[userSelected].textContent;
-    if(firstCell < nextCell){
-      return -1;
+    let orderedRows = rows.sort((a, b) => {
+      let firstCell = a.cells[userSelected].textContent,
+      nextCell = b.cells[userSelected].textContent;
+      if(firstCell < nextCell){
+        return -1;
+      }
+      if(firstCell > nextCell){
+        return 1;
+      }
+      return 0;
+    });
+
+    if(this.columnStatus[userSelected]) {
+      orderedRows.reverse();
     }
-    if(firstCell > nextCell){
-      return 1;
-    }
-    return 0;
-  });
+    this.columnStatus[userSelected] = !this.columnStatus[userSelected];
 
-  if(columnStatus[userSelected]) {
-    orderedRows.reverse();
+    return orderedRows;
   }
-  columnStatus[userSelected] = !columnStatus[userSelected];
-  
-  return orderedRows;
-}
+};
 
-function updateContactsOrder(orderedContacts) {
-  let table = document.getElementById('contact_details');
-  let fragment = new DocumentFragment();
+const sorterUi = {
+  _table: document.getElementById('contact_details'),
+  _arrows: document.getElementById('column_names'),
 
-  orderedContacts.forEach(row => fragment.appendChild(row));
-  table.appendChild(fragment);
-}
+  set table (updatedRows) {
+    this._table.appendChild(updatedRows);
+  },
 
-function changeDisplayArrow(userSelected) {
-  let arrows = document.getElementById('column_names').rows[0].cells[userSelected];
+  _updateContactsOrder(orderedContacts) {
+    let fragment = new DocumentFragment();
 
-  arrows.classList.toggle('decending');
-}
+    orderedContacts.forEach(row => fragment.appendChild(row));
+    this.table = fragment;
+  },
 
+  set changeDisplayArrow(userSelected) {
+    this._arrows.rows[0].cells[userSelected].classList.toggle('decending');
+  },
 
-let columnStatus;
+  initiaize() {
+    colunms.initializeSortingStatus();
+    document.getElementById('column_names').addEventListener('click', event => {
+      let columnClicked = event.target.cellIndex;
+      let orderedContacts = colunms.columnAlphabetical(columnClicked);
 
-initializeSortingStatus();
-
-document.getElementById('column_names').addEventListener('click', event => {
-  let columnClicked = event.target.cellIndex;
-  let orderedContacts = columnAlphabetical(columnClicked);
-
-  updateContactsOrder(orderedContacts);
-  changeDisplayArrow(columnClicked);
-});
+      this._updateContactsOrder(orderedContacts);
+      this.changeDisplayArrow = columnClicked;
+    });
+  }
+};
+sorterUi.initiaize();
