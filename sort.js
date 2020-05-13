@@ -2,9 +2,9 @@ const colunms = {
   columnStatus: [],
 
   initializeSortingStatus() {
-    let rows = addressBook.buildContactList();
-    
-    this.columnStatus = new Array(rows[0].cells.length);
+    let numberOfColumns = document.querySelectorAll('th').length;
+
+    this.columnStatus = new Array(numberOfColumns);
     this.columnStatus.fill(false);
   },
 

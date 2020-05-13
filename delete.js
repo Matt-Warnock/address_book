@@ -1,13 +1,9 @@
-const addressBook = {
-  allAddress: document.getElementById('contact_details'),
-
-  buildContactList() {
-    return Array.from(this.allAddress.rows);
-  },
+const deleter = {
+  name_colunm_index: 0,
 
   findContactToDelete(nameInput) {
-    let rows = this.buildContactList();
-    return rows.find(row => row.cells[0].textContent === nameInput);
+    let rows = addressBook.buildContactList();
+    return rows.find(row => row.cells[this.name_colunm_index].textContent === nameInput);
   },
 
   deleteContact(toBeDeleted) {
@@ -17,28 +13,21 @@ const addressBook = {
 
 const deletionUi = {
   _userEntry: document.getElementById('user_contact_name'),
-  _messageOutput: document.getElementById('error_message'),
 
   get userEntry() {
     return this._userEntry.value;
   },
 
-  set displayInfoMessage(userResult) {
-    if (typeof userResult === 'string') {
-      this._messageOutput.textContent = userResult;
-    }else {
-      console.error('data type should be string!');
-    }
-  },
-
   _deletionProcedure() {
-    let addressToDelete = addressBook.findContactToDelete(this.userEntry);
+    let addressToDelete = deleter.findContactToDelete(this.userEntry);
 
-    if(addressToDelete !== undefined){
-      this.displayInfoMessage = '';
-      addressBook.deleteContact(addressToDelete);
+    if(!addressToDelete){
+      mainUi.displayInfoMessage = 'That contact does not exist';
+      return;
     }else {
-      this.displayInfoMessage = 'That contact does not exist';
+      mainUi.displayInfoMessage = '';
+      deleter.deleteContact(addressToDelete);
+
     }
   },
 

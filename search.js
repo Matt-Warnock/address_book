@@ -26,12 +26,12 @@ const searcherUi = {
     let result = addressList.findMatchingContacts(this.userSearch, rows);
 
     if (result.length > 0) {
-      deletionUi.displayInfoMessage = '';
+      mainUi.displayInfoMessage = '';
       this._hideAllAddress(rows);
       result.forEach(contact => contact.classList.remove('hide_address'));
     }else {
       this._restoreAllAddress(rows);
-      deletionUi.displayInfoMessage = 'I can not find any match with your search!';
+      mainUi.displayInfoMessage = 'I can not find any match with your search!';
     }
   },
 
