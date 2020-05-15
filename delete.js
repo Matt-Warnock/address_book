@@ -1,33 +1,42 @@
-function buildContactList() {
-  const allAddress = document.getElementById('contact_details');
-  return Array.from(allAddress.rows);
-}
+const deleter = {
+  name_colunm_index: 0,
 
-function displayInfoMessage(userResult) {
-  const note = document.getElementById('error_message');
-  note.textContent = userResult;
-}
+  findContactToDelete(nameInput) {
+    let rows = addressBook.buildContactList();
+    return rows.find(row => row.cells[this.name_colunm_index].textContent === nameInput);
+  },
 
-function deleteContact(toBeDeleted) {
-  toBeDeleted.remove();
-}
-
-function contactDatabaseDeletion(nameInput) {
-  let rows = buildContactList();
-  let addressToDelete = rows.find(row => row.cells[0].textContent === nameInput.value);
-
-  if(addressToDelete !== undefined){
-    displayInfoMessage('');
-    deleteContact(addressToDelete);
-  }else {
-    displayInfoMessage('That contact does not exist');
+  deleteContact(toBeDeleted) {
+    toBeDeleted.remove();
   }
-}
+};
 
-document.getElementById('user_contact_name').addEventListener('keydown', event => {
-  const userEntry = document.getElementById('user_contact_name');
+const deletionUi = {
+  _userEntry: document.getElementById('user_contact_name'),
 
-  if(event.code === 'Enter'){
-    contactDatabaseDeletion(userEntry);
+  get userEntry() {
+    return this._userEntry.value;
+  },
+
+  _deletionProcedure() {
+    let addressToDelete = deleter.findContactToDelete(this.userEntry);
+
+    if(!addressToDelete){
+      mainUi.displayInfoMessage = 'That contact does not exist';
+      return;
+    }else {
+      mainUi.displayInfoMessage = '';
+      deleter.deleteContact(addressToDelete);
+
+    }
+  },
+
+  initiaize() {
+    document.getElementById('user_contact_name').addEventListener('keydown', event => {
+      if(event.code === 'Enter'){
+        this._deletionProcedure();
+      }
+    });
   }
-});
+};
+deletionUi.initiaize();
