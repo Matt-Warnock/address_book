@@ -1,7 +1,7 @@
 class Deleter {
-  constructor(contactsObject) {
+  constructor(mainObject) {
     this.name_colunm_index = 0;
-    this.allContacts = contactsObject;
+    this.allContacts = mainObject.addressBook;
   }
 
   findContactToDelete(nameInput) {
@@ -15,10 +15,10 @@ class Deleter {
 }
 
 class DeletionUi {
-  constructor(deleterObject, outputObject) {
+  constructor(deleterObject, mainObject) {
     this._userEntry = document.getElementById('user_contact_name');
     this.eraser = deleterObject;
-    this.outputer = outputObject;
+    this.outputer = mainObject.mainUi;
   }
 
   get userEntry() {
@@ -46,6 +46,6 @@ class DeletionUi {
     });
   }
 }
-const deleter = new Deleter(addressBook);
-const deletionUi = new DeletionUi(deleter, mainUi);
+const deleter = new Deleter(addressMain);
+const deletionUi = new DeletionUi(deleter, addressMain);
 deletionUi.initiaize();
