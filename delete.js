@@ -1,35 +1,42 @@
-const deleter = {
-  name_colunm_index: 0,
+class Deleter {
+  constructor(contactsObject) {
+    this.name_colunm_index = 0;
+    this.allContacts = contactsObject;
+  }
 
   findContactToDelete(nameInput) {
-    let rows = addressBook.buildContactList();
+    let rows = this.allContacts.buildContactList();
     return rows.find(row => row.cells[this.name_colunm_index].textContent === nameInput);
-  },
+  }
 
   deleteContact(toBeDeleted) {
     toBeDeleted.remove();
   }
-};
+}
 
-const deletionUi = {
-  _userEntry: document.getElementById('user_contact_name'),
+class DeletionUi {
+  constructor(deleterObject, outputObject) {
+    this._userEntry = document.getElementById('user_contact_name');
+    this.eraser = deleterObject;
+    this.outputer = outputObject;
+  }
 
   get userEntry() {
     return this._userEntry.value;
-  },
+  }
 
   _deletionProcedure() {
-    let addressToDelete = deleter.findContactToDelete(this.userEntry);
+    let addressToDelete = this.eraser.findContactToDelete(this.userEntry);
 
     if(!addressToDelete){
-      mainUi.displayInfoMessage = 'That contact does not exist';
+      this.outputer.displayInfoMessage = 'That contact does not exist';
       return;
     }else {
-      mainUi.displayInfoMessage = '';
-      deleter.deleteContact(addressToDelete);
+      this.outputer.displayInfoMessage = '';
+      this.eraser.deleteContact(addressToDelete);
 
     }
-  },
+  }
 
   initiaize() {
     document.getElementById('user_contact_name').addEventListener('keydown', event => {
@@ -38,5 +45,7 @@ const deletionUi = {
       }
     });
   }
-};
+}
+const deleter = new Deleter(addressBook);
+const deletionUi = new DeletionUi(deleter, mainUi);
 deletionUi.initiaize();
