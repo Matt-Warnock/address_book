@@ -15,6 +15,7 @@ class MainUi {
     this._messageOutput.textContent = userResult;
   }
 }
+
 const addressMain = {
   addressBook: new AddressBook(),
   mainUi: new MainUi()

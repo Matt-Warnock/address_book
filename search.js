@@ -48,5 +48,4 @@ class SearcherUi {
   }
 }
 const searcher = new Searcher(),
-searcherUi = new SearcherUi(searcher, addressMain);
-searcherUi.initiaize();
+searcherUi = new SearcherUi(searcher, addressMain).initiaize();

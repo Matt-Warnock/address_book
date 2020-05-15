@@ -46,6 +46,5 @@ class DeletionUi {
     });
   }
 }
-const deleter = new Deleter(addressMain);
-const deletionUi = new DeletionUi(deleter, addressMain);
-deletionUi.initiaize();
+const deleter = new Deleter(addressMain),
+deletionUi = new DeletionUi(deleter, addressMain).initiaize();

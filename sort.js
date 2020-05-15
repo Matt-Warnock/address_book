@@ -69,5 +69,4 @@ class SorterUi {
   }
 }
 const sorter = new Sorter(addressMain),
-sorterUi = new SorterUi(sorter);
-sorterUi.initiaize();
+sorterUi = new SorterUi(sorter).initiaize();
