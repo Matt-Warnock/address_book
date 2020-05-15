@@ -8,11 +8,11 @@ class Searcher {
 
 class SearcherUi {
   constructor(searcherObject, mainObject) {
-  this._userSearch = document.getElementById('search_word');
-  this.finder = searcherObject;
-  this.allContacts = mainObject.addressBook;
-  this.outputer = mainObject.mainUi;
-}
+    this._userSearch = document.getElementById('search_word');
+    this.finder = searcherObject;
+    this.allContacts = mainObject.addressBook;
+    this.outputer = mainObject.mainUi;
+  }
   get userSearch() {
     return this._userSearch.value.toLowerCase();
   }
