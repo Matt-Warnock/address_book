@@ -1,7 +1,7 @@
 class Sorter {
-  constructor(mainObject) {
+  constructor(addressBook) {
     this.columnStatus = [];
-    this.allContacts = mainObject.addressBook;
+    this._addressBook = addressBook;
   }
 
   initializeSortingStatus() {
@@ -12,7 +12,7 @@ class Sorter {
   }
 
   columnAlphabetical(userSelected) {
-    let rows = this.allContacts.buildContactList();
+    let rows = this._addressBook.buildContactList();
 
     let orderedRows = rows.sort((a, b) => {
       let firstCell = a.cells[userSelected].textContent,
@@ -36,11 +36,11 @@ class Sorter {
 }
 
 class SorterUi {
-  constructor(sorterObject) {
+  constructor(sorter) {
     this._headerRowIndex = 0;
     this._table = document.getElementById('contact_details');
     this._arrows = document.getElementById('column_names');
-    this.arranger = sorterObject;
+    this._sorter = sorter;
   }
   set table (updatedRows) {
     this._table.appendChild(updatedRows);
@@ -58,15 +58,15 @@ class SorterUi {
   }
 
   initiaize() {
-    this.arranger.initializeSortingStatus();
+    this._sorter.initializeSortingStatus();
     document.getElementById('column_names').addEventListener('click', event => {
-      let columnClicked = event.target.cellIndex;
-      let orderedContacts = this.arranger.columnAlphabetical(columnClicked);
+      let columnClicked = event.target.cellIndex,
+      orderedContacts = this._sorter.columnAlphabetical(columnClicked);
 
       this._updateContactsOrder(orderedContacts);
       this.changeDisplayArrow = columnClicked;
     });
   }
 }
-const sorter = new Sorter(addressMain),
-sorterUi = new SorterUi(sorter).initiaize();
+const sorter = new Sorter(addressBook);
+(new SorterUi(sorter)).initiaize();

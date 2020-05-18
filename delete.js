@@ -1,12 +1,12 @@
 class Deleter {
-  constructor(mainObject) {
-    this.name_colunm_index = 0;
-    this.allContacts = mainObject.addressBook;
+  constructor(addressBook) {
+    this._name_colunm_index = 0;
+    this._addressBook = addressBook;
   }
 
   findContactToDelete(nameInput) {
-    let rows = this.allContacts.buildContactList();
-    return rows.find(row => row.cells[this.name_colunm_index].textContent === nameInput);
+    let rows = this._addressBook.buildContactList();
+    return rows.find(row => row.cells[this._name_colunm_index].textContent === nameInput);
   }
 
   deleteContact(toBeDeleted) {
@@ -15,10 +15,10 @@ class Deleter {
 }
 
 class DeletionUi {
-  constructor(deleterObject, mainObject) {
+  constructor(deleter, mainUi) {
     this._userEntry = document.getElementById('user_contact_name');
-    this.eraser = deleterObject;
-    this.outputer = mainObject.mainUi;
+    this._deleter = deleter;
+    this._mainUi = mainUi;
   }
 
   get userEntry() {
@@ -26,16 +26,14 @@ class DeletionUi {
   }
 
   _deletionProcedure() {
-    let addressToDelete = this.eraser.findContactToDelete(this.userEntry);
+    let addressToDelete = this._deleter.findContactToDelete(this.userEntry);
 
     if(!addressToDelete){
-      this.outputer.displayInfoMessage = 'That contact does not exist';
+      this._mainUi.displayInfoMessage = 'That contact does not exist';
       return;
-    }else {
-      this.outputer.displayInfoMessage = '';
-      this.eraser.deleteContact(addressToDelete);
-
     }
+    this._mainUi.displayInfoMessage = '';
+    this._deleter.deleteContact(addressToDelete);
   }
 
   initiaize() {
@@ -46,5 +44,5 @@ class DeletionUi {
     });
   }
 }
-const deleter = new Deleter(addressMain),
-deletionUi = new DeletionUi(deleter, addressMain).initiaize();
+const deleter = new Deleter(addressBook);
+(new DeletionUi(deleter, mainUi)).initiaize();

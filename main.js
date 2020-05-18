@@ -16,7 +16,5 @@ class MainUi {
   }
 }
 
-const addressMain = {
-  addressBook: new AddressBook(),
-  mainUi: new MainUi()
-};
+const addressBook = new AddressBook(),
+mainUi = new MainUi();

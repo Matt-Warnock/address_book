@@ -7,11 +7,11 @@ class Searcher {
 }
 
 class SearcherUi {
-  constructor(searcherObject, mainObject) {
+  constructor(searcher, addressBook, mainUi) {
     this._userSearch = document.getElementById('search_word');
-    this.finder = searcherObject;
-    this.allContacts = mainObject.addressBook;
-    this.outputer = mainObject.mainUi;
+    this._searcher = searcher;
+    this._addressBook = addressBook;
+    this._mainUi = mainUi;
   }
   get userSearch() {
     return this._userSearch.value.toLowerCase();
@@ -26,16 +26,16 @@ class SearcherUi {
   }
 
   displaySearchResult() {
-    let rows = this.allContacts.buildContactList(),
-    result = this.finder.findMatchingContacts(this.userSearch, rows);
+    let rows = this._addressBook.buildContactList(),
+    result = this._searcher.findMatchingContacts(this.userSearch, rows);
 
     if (result.length > 0) {
-      this.outputer.displayInfoMessage = '';
+      this._mainUi.displayInfoMessage = '';
       this._hideAllAddress(rows);
       result.forEach(contact => contact.classList.remove('hide_address'));
     }else {
       this._restoreAllAddress(rows);
-      this.outputer.displayInfoMessage = 'I can not find any match with your search!';
+      this._mainUi.displayInfoMessage = 'I can not find any match with your search!';
     }
   }
 
@@ -47,5 +47,5 @@ class SearcherUi {
     });
   }
 }
-const searcher = new Searcher(),
-searcherUi = new SearcherUi(searcher, addressMain).initiaize();
+const searcher = new Searcher();
+(new SearcherUi(searcher, addressBook, mainUi)).initiaize();
