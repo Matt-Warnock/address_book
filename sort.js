@@ -1,15 +1,18 @@
-const colunms = {
-  columnStatus: [],
+class Sorter {
+  constructor(addressBook) {
+    this.columnStatus = [];
+    this._addressBook = addressBook;
+  }
 
   initializeSortingStatus() {
     let numberOfColumns = document.querySelectorAll('th').length;
 
     this.columnStatus = new Array(numberOfColumns);
     this.columnStatus.fill(false);
-  },
+  }
 
   columnAlphabetical(userSelected) {
-    let rows = addressBook.buildContactList();
+    let rows = this._addressBook.buildContactList();
 
     let orderedRows = rows.sort((a, b) => {
       let firstCell = a.cells[userSelected].textContent,
@@ -30,36 +33,40 @@ const colunms = {
 
     return orderedRows;
   }
-};
+}
 
-const sorterUi = {
-  _table: document.getElementById('contact_details'),
-  _arrows: document.getElementById('column_names'),
-
+class SorterUi {
+  constructor(sorter) {
+    this._headerRowIndex = 0;
+    this._table = document.getElementById('contact_details');
+    this._arrows = document.getElementById('column_names');
+    this._sorter = sorter;
+  }
   set table (updatedRows) {
     this._table.appendChild(updatedRows);
-  },
+  }
 
   _updateContactsOrder(orderedContacts) {
     let fragment = new DocumentFragment();
 
     orderedContacts.forEach(row => fragment.appendChild(row));
     this.table = fragment;
-  },
+  }
 
   set changeDisplayArrow(userSelected) {
-    this._arrows.rows[0].cells[userSelected].classList.toggle('decending');
-  },
+    this._arrows.rows[this._headerRowIndex].cells[userSelected].classList.toggle('decending');
+  }
 
   initiaize() {
-    colunms.initializeSortingStatus();
+    this._sorter.initializeSortingStatus();
     document.getElementById('column_names').addEventListener('click', event => {
-      let columnClicked = event.target.cellIndex;
-      let orderedContacts = colunms.columnAlphabetical(columnClicked);
+      let columnClicked = event.target.cellIndex,
+      orderedContacts = this._sorter.columnAlphabetical(columnClicked);
 
       this._updateContactsOrder(orderedContacts);
       this.changeDisplayArrow = columnClicked;
     });
   }
-};
-sorterUi.initiaize();
+}
+const sorter = new Sorter(addressBook);
+(new SorterUi(sorter)).initiaize();
